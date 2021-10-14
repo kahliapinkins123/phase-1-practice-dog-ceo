@@ -6,7 +6,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
     const breedUrl = 'https://dog.ceo/api/breeds/list/all'
     let dogBreeds = document.querySelector('#dog-breeds');
     let dogImgContainer = document.querySelector('#dog-image-container');
-    let dropdown = document.querySelectorAll('#breed-dropdown option');
+    let dropdown = document.querySelector('#breed-dropdown');
 
 
     console.log(dropdown)
@@ -31,11 +31,19 @@ window.addEventListener('DOMContentLoaded', (event) => {
                 li.style.color = 'blue';
             });
         }
+        handleChange();
     })
-
-    dropdown.forEach(function(option){
-        console.log(option)
-        option.addEventListener('click', (e)=> console.log(e))
-    })
-        
+    function handleChange(){
+        dropdown.addEventListener('change', (e)=> {
+            
+            let breeds = document.querySelectorAll('li');
+            
+            for(breed of breeds){
+                if(e.target.value !== breed.innerText.charAt(0)){
+                    breed.remove();
+                }
+            }
+         });
+    
+    }      
 });
